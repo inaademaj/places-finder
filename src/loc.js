@@ -17,12 +17,27 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
   return d;
 }
 
+export function formatDistance(distance) {
+  if (distance == null) {
+    return null;
+  }
+
+  if (distance < 10) {
+    return `${distance.toFixed(1)} km away`;
+  }
+
+  return `${Math.round(distance)} km away`;
+}
+
 export function sortPlacesByDistance(places, lat, lon) {
-  const sortedPlaces = [...places];
+  const sortedPlaces = places.map((place) => ({
+    ...place,
+    distance: calculateDistance(lat, lon, place.lat, place.lon),
+  }));
+
   sortedPlaces.sort((a, b) => {
-    const distanceA = calculateDistance(lat, lon, a.lat, a.lon);
-    const distanceB = calculateDistance(lat, lon, b.lat, b.lon);
-    return distanceA - distanceB;
+    return a.distance - b.distance;
   });
+
   return sortedPlaces;
 }

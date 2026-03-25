@@ -1,41 +1,52 @@
-# **🗺️ Places Finder App — Summary**
+# Places Finder App
 
-A React app that fetches and displays nearby places, sorted by the user’s current location. It includes error handling, modals, loading states, and confirmation dialogs.
+A React travel planner that fetches destination suggestions from a local Express API, ranks them by the user's current location, and lets the user build a saved holiday shortlist.
 
-### Main Features:
+## Features
 
-* Fetches available places from a backend API.
+- Fetches destinations from a backend API
+- Sorts recommendations by distance when location access is available
+- Handles loading, permission, empty, and error states
+- Lets users save and remove destinations from their itinerary
+- Uses reusable UI pieces such as `Modal`, `Error`, and destination cards
 
-* Sorts results by distance using geolocation.
+## Project Structure
 
-* Displays places with images and titles.
+- `src/`: React frontend
+- `backend/`: Express API and image/data files
 
-* Handles loading, empty, and error states.
+## Run The Project
 
-* Includes reusable components like Modal, Error, and DeleteConfirmation.
+Install both parts first:
 
-### Key Components:
-
-* AvailablePlaces: Fetches and shows sorted places.
-
-* Places: Renders clickable place cards.
-
-* DeleteConfirmation: Auto-timed confirmation dialog.
-
-* Error: Displays error messages.
-
-* Modal: General-purpose dialog wrapper.
-
-### Utilities:
-
-fetchAvailablePlaces() – fetches data.
-
-sortPlacesByDistance() – sorts places by proximity.
-
-### Run the App:
-~~~~
-
+```bash
 npm install
-npm run dev
-~~~~
+npm install --prefix backend
+```
 
+Then run everything together:
+
+```bash
+npm run dev:all
+```
+
+You can also run them separately:
+
+```bash
+npm run dev:client
+npm run dev:server
+```
+
+## Common Issue
+
+If you see `ERR_CONNECTION_REFUSED`, the frontend is running but the backend API is not. Start the backend with:
+
+```bash
+npm run dev:server
+```
+
+or run both apps together with:
+
+```bash
+npm run dev:all
+```
